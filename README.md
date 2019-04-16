@@ -1,16 +1,29 @@
-# apjt-spring-boot
+# apjt-spring-boot-demo
 Sample application demonstrating some basic spring-boot functionality
 
 ## To build...
 ```
-mvn clean verify -Drevision=1.0.1
+mvn verify -Drevision=1.0.1
 docker build --tag apjt-spring-boot-demo:latest .
 ```
 
 ## To run locally...
 ```
-docker run -it --entrypoint /bin/ash apjt-spring-boot-demo:latest -i
 docker run -p 9091:8080 apjt-spring-boot-demo:latest
+```
+
+# To connect to running instance
+
+To connect to an already running instance:
+1. Use "docker ps" to get the CONTAINER ID of the image you want to connect to
+2. Run the following command where <CONTAINER ID> is from the above step
+```
+docker exec -it <CONTAINER ID>  /bin/ash
+```
+
+To start a new instance without the service running (useful for startup issues)
+```
+docker run -it --entrypoint /bin/ash apjt-spring-boot-demo:latest -i
 ```
 
 ## Useful URLs when running:
