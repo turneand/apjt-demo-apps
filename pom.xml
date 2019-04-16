@@ -27,7 +27,7 @@
 	</properties>
 
 	<scm>
-		<url>https://github.com/turneand</url>
+		<url>https://github.com/turneand/apjt-spring-boot-demo</url>
 	</scm>
 
 	<build>
