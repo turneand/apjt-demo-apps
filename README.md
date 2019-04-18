@@ -50,6 +50,7 @@ kubectl apply -n istio-bookinfo-demo -f "%ISTIO_HOME%\samples\bookinfo\networkin
 kubectl get svc,pods,gateway,destinationrules -n istio-bookinfo-demo
 ```
 - Additional check to ensure the services are accessible internally within the cluster
+```
 kubectl get pod -n istio-bookinfo-demo -l app=ratings -o jsonpath={.items[0].metadata.name}
 kubectl exec -n istio-bookinfo-demo -it <RATINGS-POD-ID> -- curl productpage:9080/productpage
 ```
