@@ -55,16 +55,23 @@ kubectl get svc,pods,gateway,destinationrules -n istio-bookinfo-demo
 kubectl get pod -n istio-bookinfo-demo -l app=ratings -o jsonpath={.items[0].metadata.name}
 kubectl exec -n istio-bookinfo-demo -it <RATINGS-POD-ID> -- curl productpage:9080/productpage
 ```
+
+
+
+## Launch application
+
+In order for any of the subsquent metrics based applications to work, we need to start using the UI!
+
 - As we're using docker for desktop on a windows machine, we can run the following commands to get the hostname (will be localhost) and port for the istio ingress (see https://istio.io/docs/tasks/traffic-management/ingress/#determining-the-ingress-ip-and-ports)
 ```
 kubectl -n istio-system get service istio-ingressgateway -o jsonpath="{.status.loadBalancer.ingress[0].hostname}"
 kubectl -n istio-system get service istio-ingressgateway -o jsonpath="{.spec.ports[?(@.name=='http2')].port}"
 ```
-- Now test using a browser, navigate to http://localhost:80/productpage (or relevant hostname:port if different from above)
+- Now test using a browser, navigate to http://localhost:80/productpage
 
 
 
-## Test prometheus
+## Launch prometheus
 For querying metrics, see https://istio.io/docs/tasks/telemetry/metrics/querying-metrics/ for details
 
 - Run a port-forward for this test
@@ -75,7 +82,7 @@ kubectl -n istio-system port-forward service/prometheus 9090:9090
 
 
 
-## Test grafana
+## Launch grafana
 For monitoring mesh trafic, see https://istio.io/docs/tasks/telemetry/metrics/using-istio-dashboard/ for details
 
 - Run a port-forward for this test
@@ -86,7 +93,7 @@ kubectl -n istio-system port-forward service/grafana 3000:3000
 
 
 
-## Test jaeger
+## Launch jaeger
 For request tracing, ssee https://istio.io/docs/tasks/telemetry/distributed-tracing/jaeger/ for details
 
 - Run a port-forward for this test
