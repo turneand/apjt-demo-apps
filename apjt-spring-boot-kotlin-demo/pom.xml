@@ -23,12 +23,12 @@
 		<kotlin.version>1.2.71</kotlin.version>
 		<swagger.version>2.9.2</swagger.version>
 
-		<!-- We're a docker app, so do n"pom.xml"ot create the uber-jar, instead copy dependencies directly -->
+		<!-- We're a docker app, so don't create the uber-jar, instead copy dependencies directly -->
 		<spring-boot.repackage.skip>true</spring-boot.repackage.skip>
 	</properties>
 
 	<scm>
-		<url>https://github.com/turneand/apjt-spring-boot-kotlin-demo</url>
+		<url>https://github.com/turneand/apjt-demo-apps/tree/master/apjt-spring-boot-kotlin-demo</url>
 	</scm>
 
 	<build>

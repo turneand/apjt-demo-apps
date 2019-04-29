@@ -19,7 +19,7 @@
 	</properties>
 
 	<scm>
-		<url>https://github.com/turneand/apjt-dropwizard-demo</url>
+		<url>https://github.com/turneand/apjt-demo-apps/tree/master/apjt-dropwizard-demo</url>
 	</scm>
 
 	<build>
