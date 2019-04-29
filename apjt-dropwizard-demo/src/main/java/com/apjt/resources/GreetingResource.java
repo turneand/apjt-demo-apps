@@ -21,45 +21,45 @@ import com.codahale.metrics.annotation.Timed;
 
 @Path("/greeting")
 public class GreetingResource {
-	private final Executor fixedExecutor = Executors.newFixedThreadPool(10);
-	private final AtomicLong counter = new AtomicLong();
+    private final Executor fixedExecutor = Executors.newFixedThreadPool(10);
+    private final AtomicLong counter = new AtomicLong();
 
-	@Path("/sync")
+    @Path("/sync")
     @GET
     @Produces(APPLICATION_JSON)
     @Timed
     public Greeting sync(@QueryParam("name") Optional<String> name) {
-		return new Greeting(this.counter.incrementAndGet(), "Greetings from DropWizard - sync! - " + Thread.currentThread().getName());    		
+        return new Greeting(this.counter.incrementAndGet(), "Greetings from DropWizard - sync! - " + Thread.currentThread().getName());            
     }
 
-	@Path("/async-managed")
+    @Path("/async-managed")
     @GET
     @Produces(APPLICATION_JSON)
     @Timed
     @ManagedAsync
     public void managedAsync(@Suspended final AsyncResponse resp) {
-		// utilises the "@ManagedAsync" annotation for the executor pools
-		try {
-			Thread.sleep(3000);
-			resp.resume(new Greeting(this.counter.incrementAndGet(), "Greetings from DropWizard - async-managed! - " + Thread.currentThread().getName() + " - " + System.getProperty("user.name")));
-		} catch (final Exception e) {
-			resp.resume(e);
-		}
+        // utilises the "@ManagedAsync" annotation for the executor pools
+        try {
+            Thread.sleep(3000);
+            resp.resume(new Greeting(this.counter.incrementAndGet(), "Greetings from DropWizard - async-managed! - " + Thread.currentThread().getName() + " - " + System.getProperty("user.name")));
+        } catch (final Exception e) {
+            resp.resume(e);
+        }
     }
 
-	@Path("/async-manual")
+    @Path("/async-manual")
     @GET
     @Produces(APPLICATION_JSON)
     @Timed
     public void manualAsync(@Suspended final AsyncResponse resp) {
-		// uses a manually created thread pool
-		this.fixedExecutor.execute(() -> {
-			try {
-				Thread.sleep(5000);
-				resp.resume(new Greeting(this.counter.incrementAndGet(), "Greetings from DropWizard - async-manual! - " + Thread.currentThread().getName() + " - " + System.getProperty("user.name")));
-			} catch (final Exception e) {
-				resp.resume(e);
-			}
-		});
+        // uses a manually created thread pool
+        this.fixedExecutor.execute(() -> {
+            try {
+                Thread.sleep(5000);
+                resp.resume(new Greeting(this.counter.incrementAndGet(), "Greetings from DropWizard - async-manual! - " + Thread.currentThread().getName() + " - " + System.getProperty("user.name")));
+            } catch (final Exception e) {
+                resp.resume(e);
+            }
+        });
     }
 }

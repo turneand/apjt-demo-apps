@@ -11,7 +11,7 @@ public class DropWizardDemoConfiguration extends Configuration {
     private String ignoredParameter;
 
     @JsonProperty
-	public void setIgnoredParameter(String ignoredParameter) {
-		this.ignoredParameter = ignoredParameter;
-	}
+    public void setIgnoredParameter(String ignoredParameter) {
+        this.ignoredParameter = ignoredParameter;
+    }
 }

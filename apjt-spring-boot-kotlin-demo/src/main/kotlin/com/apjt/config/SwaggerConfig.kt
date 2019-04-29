@@ -25,28 +25,28 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 class SwaggerConfig @Autowired constructor(
     private val buildProperties : BuildProperties
 ) {
-	@Value("\${swagger.title}")
-	lateinit var swaggerTitle : String
+    @Value("\${swagger.title}")
+    lateinit var swaggerTitle : String
 
-	@Value("\${swagger.description}")
-	lateinit var swaggerDescription : String
+    @Value("\${swagger.description}")
+    lateinit var swaggerDescription : String
 
-	@Bean
-	fun docket() = Docket(DocumentationType.SWAGGER_2)
-				.apiInfo(apiInfo())
-				.select()
-				.apis(RequestHandlerSelectors.any())
-				.paths(paths())
-				.build()
+    @Bean
+    fun docket() = Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(paths())
+                .build()
 
-	private fun apiInfo() = ApiInfoBuilder()
+    private fun apiInfo() = ApiInfoBuilder()
                 .title(this.swaggerTitle)
                 .description(this.swaggerDescription)
                 .version(this.buildProperties.getVersion())
                 .build()
 
     private fun paths() = Predicates.and(
-        		Predicates.not(PathSelectors.regex("/actuator")),
-        		Predicates.not(PathSelectors.regex("/error.*"))
-		)
+                Predicates.not(PathSelectors.regex("/actuator")),
+                Predicates.not(PathSelectors.regex("/error.*"))
+        )
 }
