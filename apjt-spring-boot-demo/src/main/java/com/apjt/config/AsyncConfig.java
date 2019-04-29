@@ -18,22 +18,22 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @Configuration
 @EnableAsync
 public class AsyncConfig {
-	@Value("${asyncExecutor.threadCount:2}")
-	@Positive
-	private int asyncExecutorThreadCount;
+    @Value("${asyncExecutor.threadCount:2}")
+    @Positive
+    private int asyncExecutorThreadCount;
 
-	@Bean
-	public ExecutorService asyncExecutor() {
-		return Executors.newFixedThreadPool(this.asyncExecutorThreadCount, new ThreadFactory() {
-	        private final AtomicInteger threadNumber = new AtomicInteger(1);
+    @Bean
+    public ExecutorService asyncExecutor() {
+        return Executors.newFixedThreadPool(this.asyncExecutorThreadCount, new ThreadFactory() {
+            private final AtomicInteger threadNumber = new AtomicInteger(1);
 
-	        @Override
-			public Thread newThread(final Runnable r) {
-	            final Thread t = new Thread(r, "spring-managed-thread-" + this.threadNumber.getAndIncrement());
-            	t.setDaemon(false);
-            	t.setPriority(Thread.NORM_PRIORITY);
-            	return t;
-			}
-		});
-	}
+            @Override
+            public Thread newThread(final Runnable r) {
+                final Thread t = new Thread(r, "spring-managed-thread-" + this.threadNumber.getAndIncrement());
+                t.setDaemon(false);
+                t.setPriority(Thread.NORM_PRIORITY);
+                return t;
+            }
+        });
+    }
 }

@@ -17,10 +17,10 @@ import com.apjt.dto.Greeting
 @RestController
 @RequestMapping("/greeting")
 open class GreetingController {
-	val counter = AtomicLong()
+    val counter = AtomicLong()
 
-	// TODO - Bug here, that this is NOT executed asynchronously!
-	// had thought that class and async methods need to be defined "open" (i.e. non-final) would resolve, but no luck so far...
+    // TODO - Bug here, that this is NOT executed asynchronously!
+    // had thought that class and async methods need to be defined "open" (i.e. non-final) would resolve, but no luck so far...
     @GetMapping("/async2")
     @Async("asyncExecutor")
     open fun async2() = CompletableFuture.completedFuture(Greeting(counter.incrementAndGet(), "Greetings from Spring Boot Kotlin - async2! - " + Thread.currentThread().getName() + " - " + System.getProperty("user.name")))

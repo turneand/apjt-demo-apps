@@ -23,37 +23,37 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-	@Autowired
-	private BuildProperties buildProperties;
+    @Autowired
+    private BuildProperties buildProperties;
 
-	@Value("${swagger.title}")
-	private String swaggerTitle;
+    @Value("${swagger.title}")
+    private String swaggerTitle;
 
-	@Value("${swagger.description}")
-	private String swaggerDescription;
+    @Value("${swagger.description}")
+    private String swaggerDescription;
 
-	@Bean
-	public Docket docket() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.apiInfo(apiInfo())
-				.select()
-				.apis(RequestHandlerSelectors.any())
-				.paths(paths())
-				.build();
-	}
+    @Bean
+    public Docket docket() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(paths())
+                .build();
+    }
 
-	private ApiInfo apiInfo() {
+    private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title(this.swaggerTitle)
                 .description(this.swaggerDescription)
                 .version(this.buildProperties.getVersion())
                 .build();
-	}
+    }
 
     private Predicate<String> paths() {
         return Predicates.and(
-        		Predicates.not(PathSelectors.regex("/actuator")),
-        		Predicates.not(PathSelectors.regex("/error.*"))
-		);
+                Predicates.not(PathSelectors.regex("/actuator")),
+                Predicates.not(PathSelectors.regex("/error.*"))
+        );
     }
 }

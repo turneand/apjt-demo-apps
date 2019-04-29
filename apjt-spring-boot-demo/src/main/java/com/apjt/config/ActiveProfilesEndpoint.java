@@ -13,14 +13,14 @@ import org.springframework.stereotype.Component;
 @Component
 @Endpoint(id = "activeProfiles")
 public class ActiveProfilesEndpoint {
-	@Autowired
-	private Environment environment;
+    @Autowired
+    private Environment environment;
 
-	/**
-	 * @see Environment#getActiveProfiles()
-	 */
-	@ReadOperation
-	public String[] getActiveProfiles() {
-		return this.environment.getActiveProfiles();
-	}
+    /**
+     * @see Environment#getActiveProfiles()
+     */
+    @ReadOperation
+    public String[] getActiveProfiles() {
+        return this.environment.getActiveProfiles();
+    }
 }

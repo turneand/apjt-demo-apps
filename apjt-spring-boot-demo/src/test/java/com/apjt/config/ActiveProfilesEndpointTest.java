@@ -21,14 +21,14 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 public class ActiveProfilesEndpointTest {
-	@Autowired
-	private MockMvc mvc;
+    @Autowired
+    private MockMvc mvc;
 
-	@Test
-	public void testActiveProfiles() throws Exception {
-		this.mvc.perform(get("/actuator/activeProfiles"))
-				.andExpect(status().isOk())
-				.andExpect(content().string("[\"test\"]"));
-	}
+    @Test
+    public void testActiveProfiles() throws Exception {
+        this.mvc.perform(get("/actuator/activeProfiles"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("[\"test\"]"));
+    }
 
 }
