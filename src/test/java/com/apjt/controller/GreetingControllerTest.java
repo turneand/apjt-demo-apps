@@ -35,15 +35,27 @@ public class GreetingControllerTest {
 	private MockMvc mvc;
 
 	@Test
-	public void testAsync() throws Exception {
-		final MvcResult mvcResult = this.mvc.perform(get("/greeting/async"))
+	public void testAsync1() throws Exception {
+		final MvcResult mvcResult = this.mvc.perform(get("/greeting/async1"))
 				.andExpect(request().asyncStarted())
 				.andReturn();
 
 		this.mvc.perform(asyncDispatch(mvcResult))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
-				.andExpect(content().string(containsString("Greetings from Spring Boot - async! - ")));
+				.andExpect(content().string(containsString("Greetings from Spring Boot - async1! - ")));
+	}
+
+	@Test
+	public void testAsync2() throws Exception {
+		final MvcResult mvcResult = this.mvc.perform(get("/greeting/async2"))
+				.andExpect(request().asyncStarted())
+				.andReturn();
+
+		this.mvc.perform(asyncDispatch(mvcResult))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(APPLICATION_JSON_UTF8))
+				.andExpect(content().string(containsString("Greetings from Spring Boot - async2! - ")));
 	}
 
 	@Test
